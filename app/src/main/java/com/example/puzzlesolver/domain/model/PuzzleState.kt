@@ -28,8 +28,8 @@ data class PuzzleState(
         newBoard[emptyY][emptyX] = newBoard[newEmptyY][newEmptyX]
         newBoard[newEmptyY][newEmptyX] = 0
         
-        newBoard.forEach { it.toList() }
+        val finalBoard = newBoard.map { it.toList() }
 
-        return PuzzleState(newBoard, newEmptyY, newEmptyX)
+        return PuzzleState(finalBoard, newEmptyY, newEmptyX)
     }
 }
