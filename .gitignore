@@ -1,0 +1,36 @@
+# IDE - Android Studio / IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+*.apk
+
+# Kotlin
+.kotlin/
+
+# Gradle
+.gradle/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local properties
+local.properties
+
+# Misc
+*.log
+*.class
+*.jar
+*.war
+*.aar
+*.zip
+*.tar.gz
+*.rar
+
+# Backup files
+*.bak
+*~
+*.swp
+*.swo
