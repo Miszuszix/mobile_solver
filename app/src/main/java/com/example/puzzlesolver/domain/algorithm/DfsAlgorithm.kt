@@ -7,12 +7,14 @@ import com.example.puzzlesolver.domain.model.PuzzleState
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.isActive
 
-class BfsAlgorithm {
+class DfsAlgorithm {
     suspend fun solve(
         initialState: PuzzleState,
         goalState: PuzzleState,
-        moveOrder: List<Move>
+        moveOrder: List<Move>,
+        maxDepth: Int = 20
     ): AlgorithmResult {
+
         val initialNode = Node(initialState)
 
         val openStates = ArrayDeque<Node>()
@@ -21,23 +23,22 @@ class BfsAlgorithm {
         var generatedCount = 0
         var visitedCount = 0
 
-        openStates.add(initialNode)
+        openStates.addLast(initialNode)
         closedStates.add(initialState)
         generatedCount++
 
         while (openStates.isNotEmpty() && currentCoroutineContext().isActive) {
-            val currentNode = openStates.removeFirst()
+            val currentNode = openStates.removeLast()
             visitedCount++
 
             if (currentNode.state.isGoal(goalState)) {
                 return AlgorithmResult(currentNode, generatedCount, visitedCount)
             }
-
-            for (neighbour in currentNode.expand(moveOrder)){
+            if (currentNode.depth >= maxDepth) continue
+            for(neighbour in currentNode.expand(moveOrder).reversed()){
                 if (neighbour.state !in closedStates){
                     closedStates.add(neighbour.state)
                     openStates.addLast(neighbour)
-
                     generatedCount++
                 }
             }
