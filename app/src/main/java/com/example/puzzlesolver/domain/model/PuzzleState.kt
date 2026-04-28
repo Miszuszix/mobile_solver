@@ -2,8 +2,8 @@ package com.example.puzzlesolver.domain.model
 
 data class PuzzleState(
     val board: List<List<Int>>,
-    val emptyX: Int,
-    val emptyY: Int
+    val emptyY: Int,
+    val emptyX: Int
 ) {
     fun isGoal(goalState: PuzzleState): Boolean {
         return this == goalState
@@ -30,6 +30,6 @@ data class PuzzleState(
         
         newBoard.forEach { it.toList() }
 
-        return PuzzleState(newBoard, newEmptyX, newEmptyY)
+        return PuzzleState(newBoard, newEmptyY, newEmptyX)
     }
 }
