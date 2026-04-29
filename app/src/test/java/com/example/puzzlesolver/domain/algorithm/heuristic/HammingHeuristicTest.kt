@@ -11,9 +11,8 @@ class HammingHeuristicTest {
     
     @Before
     fun setUp() {
-        heuristic = HammingHeuristic()
         goalState = PuzzleState(
-            listOf(
+            board = listOf(
                 listOf(1, 2, 3),
                 listOf(4, 5, 6),
                 listOf(7, 8, 0)
@@ -21,11 +20,12 @@ class HammingHeuristicTest {
             2,
             2
         )
+        heuristic = HammingHeuristic(goalState)
     }
 
     @Test
     fun `calculate should return 0 when states are identical`() {
-        val hammingResult = heuristic.calculate(goalState, goalState)
+        val hammingResult = heuristic.calculate(goalState)
         assertEquals(0, hammingResult)
     }
 
@@ -40,7 +40,7 @@ class HammingHeuristicTest {
             1,
             1
         )
-        val hammingResult = heuristic.calculate(testState, goalState)
+        val hammingResult = heuristic.calculate(testState)
         assertEquals(2, hammingResult)
     }
 }

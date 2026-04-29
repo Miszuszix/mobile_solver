@@ -29,7 +29,7 @@ class BfsAlgorithm {
             val currentNode = openStates.removeFirst()
             visitedCount++
 
-            if (currentNode.state.isGoal(goalState)) {
+            if (currentNode.state == goalState) {
                 return AlgorithmResult(currentNode, generatedCount, visitedCount)
             }
 

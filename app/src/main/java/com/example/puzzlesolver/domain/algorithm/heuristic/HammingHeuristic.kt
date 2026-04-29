@@ -2,8 +2,8 @@ package com.example.puzzlesolver.domain.algorithm.heuristic
 
 import com.example.puzzlesolver.domain.model.PuzzleState
 
-class HammingHeuristic : Heuristic {
-    override fun calculate(state: PuzzleState, goalState: PuzzleState): Int {
+class HammingHeuristic(private val goalState: PuzzleState) : Heuristic {
+    override fun calculate(state: PuzzleState): Int {
         var misplacedCount = 0
 
         val height = state.board.size

@@ -5,10 +5,6 @@ data class PuzzleState(
     val emptyY: Int,
     val emptyX: Int
 ) {
-    fun isGoal(goalState: PuzzleState): Boolean {
-        return this == goalState
-    }
-
     fun createNextState(move: Move): PuzzleState? {
         val (newEmptyX, newEmptyY) = when (move) {
             Move.UP -> emptyX to emptyY - 1

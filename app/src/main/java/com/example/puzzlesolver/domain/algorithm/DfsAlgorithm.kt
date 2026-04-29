@@ -31,7 +31,7 @@ class DfsAlgorithm {
             val currentNode = openStates.removeLast()
             visitedCount++
 
-            if (currentNode.state.isGoal(goalState)) {
+            if (currentNode.state == goalState) {
                 return AlgorithmResult(currentNode, generatedCount, visitedCount)
             }
             if (currentNode.depth >= maxDepth) continue
