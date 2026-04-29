@@ -26,9 +26,9 @@ class BfsAlgorithmTest {
         val initialState = PuzzleState(initialBoard, 2, 1)
         
         val moveOrder = listOf(Move.UP, Move.RIGHT, Move.DOWN, Move.LEFT)
-        val algorithm = BfsAlgorithm()
+        val algorithm = BfsAlgorithm(moveOrder)
         
-        val result = algorithm.solve(initialState, goalState, moveOrder)
+        val result = algorithm.solve(initialState, goalState)
 
         assertNotNull(result.solutionNode)
         val path = result.solutionNode?.getPath()

@@ -10,7 +10,7 @@ class HammingHeuristicTest {
     private lateinit var goalState: PuzzleState
     
     @Before
-    fun setUp() {
+    fun setup() {
         goalState = PuzzleState(
             board = listOf(
                 listOf(1, 2, 3),

@@ -8,7 +8,7 @@ data class Node(
     val cost: Int = 0
 ) : Comparable<Node> {
 
-    fun expand(moveOrder: List<Move>): List<Node> {
+    fun expand(moveOrder: List<Move> = listOf(Move.RIGHT, Move.UP, Move.DOWN, Move.LEFT)): List<Node> {
         val neighbors = mutableListOf<Node>()
 
         for (move in moveOrder) {

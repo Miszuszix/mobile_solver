@@ -27,8 +27,8 @@ class DfsAlgorithmTest {
         val initialState = PuzzleState(initialBoard, 2, 1)
 
         val moveOrder = listOf(Move.UP, Move.RIGHT, Move.DOWN, Move.LEFT)
-        val algorithm = DfsAlgorithm()
-        val result = algorithm.solve(initialState, goalState, moveOrder, 5)
+        val algorithm = DfsAlgorithm(moveOrder, 5)
+        val result = algorithm.solve(initialState, goalState)
         
         assertNotNull(result.solutionNode)
         assertEquals(Move.RIGHT, result.solutionNode?.getPath()?.first())
@@ -51,8 +51,8 @@ class DfsAlgorithmTest {
         val initialState = PuzzleState(initialBoard, 2, 1)
 
         val moveOrder = listOf(Move.UP, Move.RIGHT, Move.DOWN, Move.LEFT)
-        val algorithm = DfsAlgorithm()
-        val result = algorithm.solve(initialState, goalState, moveOrder, 0)
+        val algorithm = DfsAlgorithm(moveOrder, 0)
+        val result = algorithm.solve(initialState, goalState)
         
         assertNull(result.solutionNode)
     }

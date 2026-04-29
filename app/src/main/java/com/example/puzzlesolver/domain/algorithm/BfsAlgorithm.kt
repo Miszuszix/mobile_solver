@@ -7,11 +7,12 @@ import com.example.puzzlesolver.domain.model.PuzzleState
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.isActive
 
-class BfsAlgorithm {
-    suspend fun solve(
+class BfsAlgorithm(
+    private val moveOrder: List<Move>
+): SearchAlgorithm {
+    override suspend fun solve(
         initialState: PuzzleState,
         goalState: PuzzleState,
-        moveOrder: List<Move>
     ): AlgorithmResult {
         val initialNode = Node(initialState)
 

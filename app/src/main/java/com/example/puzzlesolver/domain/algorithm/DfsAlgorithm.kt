@@ -7,12 +7,13 @@ import com.example.puzzlesolver.domain.model.PuzzleState
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.isActive
 
-class DfsAlgorithm {
-    suspend fun solve(
+class DfsAlgorithm(
+    private val moveOrder: List<Move>,
+    private val maxDepth: Int = 20
+) : SearchAlgorithm {
+    override suspend fun solve(
         initialState: PuzzleState,
         goalState: PuzzleState,
-        moveOrder: List<Move>,
-        maxDepth: Int = 20
     ): AlgorithmResult {
 
         val initialNode = Node(initialState)
