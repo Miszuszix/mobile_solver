@@ -5,6 +5,11 @@
 *.ipr
 *.apk
 
+#AI Agents
+AGENTS.md
+GEMINI.md
+.aiexclude
+
 # Kotlin
 .kotlin/
 
