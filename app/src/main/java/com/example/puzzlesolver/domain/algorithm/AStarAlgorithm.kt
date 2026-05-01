@@ -16,46 +16,41 @@ class AStarAlgorithm(
         initialState: PuzzleState,
         goalState: PuzzleState,
     ): AlgorithmResult {
-
-        val openStates = PriorityQueue<Node>(compareBy { it.cost })
-        val closedStates = mutableSetOf<PuzzleState>()
+        val openStates = PriorityQueue<Node>()
+        val visitedScores = mutableMapOf<PuzzleState, Int>()
 
         var generatedCount = 0
         var visitedCount = 0
-        
-        val initialCost = heuristic.calculate(initialState)
         val initialNode = Node(
             state = initialState,
-            parent = null,
-            move = null,
             depth = 0,
-            cost = initialCost
+            cost = heuristic.calculate(initialState)
         )
 
         openStates.add(initialNode)
+        visitedScores[initialState] = 0
         generatedCount++
 
         while (openStates.isNotEmpty() && currentCoroutineContext().isActive) {
-            val currentNode = openStates.poll()
+            val currentNode = openStates.poll() ?: continue
             visitedCount++
 
-            if (currentNode != null) {
-                if (currentNode.state !in closedStates){
-                    if (currentNode.state == goalState){
-                        return AlgorithmResult(currentNode, generatedCount, visitedCount)
-                    }
-                    closedStates.add(currentNode.state)
-                    for (neighbour in currentNode.expand()){
-                        if (neighbour.state !in closedStates){
-                            val hValue = heuristic.calculate(neighbour.state)
-                            val fValue = hValue + neighbour.depth
-                            
-                            val updatedNeighbour = neighbour.copy(cost = fValue)
-                            
-                            openStates.add(updatedNeighbour)
-                            generatedCount++
-                        }
-                    }
+            if (currentNode.state == goalState) {
+                return AlgorithmResult(currentNode, generatedCount, visitedCount)
+            }
+
+            for (neighbour in currentNode.expand()) {
+                val newGScore = neighbour.depth
+                val existingGScore = visitedScores[neighbour.state] ?: Int.MAX_VALUE
+
+                if (newGScore < existingGScore) {
+                    visitedScores[neighbour.state] = newGScore
+
+                    val fValue = newGScore + heuristic.calculate(neighbour.state)
+                    val updatedNeighbour = neighbour.copy(cost = fValue)
+
+                    openStates.add(updatedNeighbour)
+                    generatedCount++
                 }
             }
         }
