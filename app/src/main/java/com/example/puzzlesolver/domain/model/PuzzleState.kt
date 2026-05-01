@@ -33,6 +33,26 @@ data class PuzzleState(
         return PuzzleState(newBoard, width, height, newEmptyY, newEmptyX)
     }
 
+    fun isSolvable(): Boolean {
+        var inversions = 0
+        val boardWithoutZero = board.filter { it != 0 }
+
+        for (i in 0..<boardWithoutZero.size) {
+            for (j in i + 1..<boardWithoutZero.size) {
+                if (boardWithoutZero[i] > boardWithoutZero[j]) {
+                    inversions++
+                }
+            }
+        }
+
+        return if (width % 2 != 0) {
+            inversions % 2 == 0
+        } else {
+            val emptyRowFromBottom = height - emptyY
+            (inversions + emptyRowFromBottom) % 2 != 0
+        }
+    }
+    
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is PuzzleState) return false
