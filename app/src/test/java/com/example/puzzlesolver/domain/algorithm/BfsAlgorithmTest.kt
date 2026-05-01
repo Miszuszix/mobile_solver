@@ -11,19 +11,19 @@ class BfsAlgorithmTest {
 
     @Test
     fun `solve should find correct path for simple solvable board`() = runBlocking {
-        val goalBoard = listOf(
-            listOf(1,2,3),
-            listOf(4,5,6),
-            listOf(7,8,0),
+        val goalBoard = intArrayOf(
+            1,2,3,
+            4,5,6,
+            7,8,0
         )
-        val goalState = PuzzleState(goalBoard, 2, 2)
+        val goalState = PuzzleState(goalBoard, 3, 3, 2, 2)
 
-        val initialBoard = listOf(
-            listOf(1,2,3),
-            listOf(4,5,6),
-            listOf(7,0,8),
+        val initialBoard = intArrayOf(
+            1,2,3,
+            4,5,6,
+            7,0,8
         )
-        val initialState = PuzzleState(initialBoard, 2, 1)
+        val initialState = PuzzleState(initialBoard, 3, 3, 2, 1)
         
         val moveOrder = listOf(Move.UP, Move.RIGHT, Move.DOWN, Move.LEFT)
         val algorithm = BfsAlgorithm(moveOrder)

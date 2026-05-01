@@ -10,34 +10,31 @@ import org.junit.Test
 
 class AStarAlgorithmTest {
 
+    private lateinit var testBoard: IntArray
+    private lateinit var goalBoard: IntArray
+    private lateinit var initialState: PuzzleState
     private lateinit var goalState: PuzzleState
     
     @Before
     fun setup(){
-        goalState = PuzzleState(
-            board = listOf(
-                listOf(1, 2, 3),
-                listOf(4, 5, 6),
-                listOf(7, 8, 0)
-            ),
-            2,
-            2
+        testBoard = intArrayOf(
+            1,2,3,
+            4,5,6,
+            7,0,8
         )
+        goalBoard = intArrayOf(
+            1,2,3,
+            4,5,6,
+            7,8,0
+        )
+        initialState = PuzzleState(testBoard, 3, 3, 2, 1)
+        goalState = PuzzleState(goalBoard, 3, 3, 2, 2)
     }
     
     @Test
     fun `solve should return solution node when goal is reached in one move`() = runBlocking {
-        val testState = PuzzleState(
-            board = listOf(
-                listOf(1, 2, 3),
-                listOf(4, 5, 6),
-                listOf(7, 0, 8)
-            ),
-            2,
-            1
-        )
         val algorithm = AStarAlgorithm(ManhattanHeuristic(goalState))
-        val result = algorithm.solve(testState, goalState)
+        val result = algorithm.solve(initialState, goalState)
         
         assertNotNull(result.solutionNode)
         assertEquals(1, result.solutionNode?.getPath()?.size)
