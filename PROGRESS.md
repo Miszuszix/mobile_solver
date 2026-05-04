@@ -13,15 +13,17 @@
 5. [ ] Integracja UI z ViewModel i algorytmami.
 
 ## Szczegółowa Lista zadań (UI/Presentation)
-- [ ] Konfiguracja brancha `feature/ui-prototype`.
-- [ ] Dodanie brakujących zależności (Koin, Compose Preview, UI Testing).
-- [ ] Implementacja komponentu `PuzzleTile` (reprezentacja pojedynczego klocka).
-- [ ] Implementacja komponentu `PuzzleGrid` (zarządzanie układem).
-- [ ] Dodanie testów UI (`ComposeTestRule`) weryfikujących poprawność wyświetlania stanów.
+- [x] Konfiguracja brancha `feature/ui-prototype`.
+- [x] Dodanie brakujących zależności (Koin, Compose Preview, UI Testing).
+- [x] Implementacja komponentu `PuzzleTile` (reprezentacja pojedynczego klocka).
+- [x] Implementacja komponentu `PuzzleGrid` (zarządzanie układem).
+- [x] Dodanie testów UI (`ComposeTestRule`) weryfikujących poprawność wyświetlania stanów.
 - [ ] Implementacja `PuzzleViewModel` obsługującego logikę UI i komunikację z `domain`.
+- [ ] Animacje przesunięć kafelków.
 
-## Notatki Techniczne
-- `PuzzleState` używa płaskiej tablicy `IntArray` dla wydajności (mapowanie 2D -> 1D: `y * width + x`).
-- A* używa `visitedScores: MutableMap<PuzzleState, Int>` dla zapewnienia optymalności.
-- Walidacja rozwiązywalności bazuje na liczbie inwersji i pozycji pustego pola.
-- UI będzie w całości oparte o Jetpack Compose, bez plików XML (poza zasobami).
+## Baza Wiedzy (Learnings)
+### Jetpack Compose
+- **State Hoisting**: Komponenty UI są "głupie" (stateless) - dostają dane i wysyłają zdarzenia w górę.
+- **Lambda `{}` vs `()`**: W `()` parametry konfiguracyjne, w `{}` kod wykonywany "później" (np. po kliknięciu).
+- **Modifier.aspectRatio(1f)**: Gwarantuje kwadratowy kształt niezależnie od rozmiaru ekranu.
+- **Testing Semantics**: Testujemy to, co widzi użytkownik (`onNodeWithText`), co czyni testy odpornymi na zmiany w kodzie.
