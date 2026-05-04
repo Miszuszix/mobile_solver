@@ -27,3 +27,9 @@
 - **Lambda `{}` vs `()`**: W `()` parametry konfiguracyjne, w `{}` kod wykonywany "później" (np. po kliknięciu).
 - **Modifier.aspectRatio(1f)**: Gwarantuje kwadratowy kształt niezależnie od rozmiaru ekranu.
 - **Testing Semantics**: Testujemy to, co widzi użytkownik (`onNodeWithText`), co czyni testy odpornymi na zmiany w kodzie.
+
+### ViewModel & Context
+- **ViewModel**: Most między UI a Domain. Przetrzymuje stan odporny na "Configuration Changes" (obrót ekranu).
+- **Configuration Changes**: Zdarzenia (obrót, zmiana języka), które niszczą Activity. ViewModel przeżywa te zmiany.
+- **Context**: Interfejs do usług systemowych Androida. **NIGDY** nie trzymamy go w ViewModelu (Memory Leaks!).
+- **DI (Koin)**: Pozwala uniknąć ręcznego tworzenia `ViewModelProvider.Factory`.

@@ -21,21 +21,14 @@ fun PuzzleGrid(
     onTileClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val gridSize = sqrt(numbers.size.toDouble()).toInt()
+        val gridSize = sqrt(numbers.size.toDouble()).toInt()
 
-        // 2. Użyj LazyVerticalGrid
         LazyVerticalGrid(
-            // TODO: Skonfiguruj stałą liczbę kolumn używając GridCells.Fixed(gridSize)
             columns = GridCells.Fixed(gridSize),
-                modifier = modifier,
-            // TODO: Dodaj odstępy między klockami (contentPadding) używając PaddingValues
+            modifier = modifier,
             contentPadding = PaddingValues(4.dp)
         ) {
-            // 3. Wypełnij siatkę elementami
-            // Użyj funkcji items(numbers) { number -> ... }
             items(numbers) { number ->
-                // TODO: Wywołaj Twój komponent PuzzleTile
-                // Podaj mu odpowiedni numer i przekaż onTileClick
                 PuzzleTile(number, onClick = { onTileClick(number) })
             }
         }
